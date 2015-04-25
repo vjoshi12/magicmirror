@@ -14,6 +14,18 @@ function roundVal(val) {
 
 $(document).ready(function() {
 
+	// Reload on git commit
+	window.setInterval(function() {
+		$.getJSON('githash.php', {}, function(json, text) {
+			if (json) {
+				if (json.gitHash != gitHash) {
+					window.location.reload();
+					window.location.href=window.location.href;
+				}
+			}
+		})
+	}, 5000);
+
 	// Update the time
 	window.setInterval(function() {
 		$("#displayDate").html(moment().format("dddd, MMMM Do YYYY"));
