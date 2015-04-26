@@ -34,7 +34,7 @@ $(document).ready(function() {
 
 	// Update the time
 	window.setInterval(function() {
-		$(".date").html(moment().format(dateFormate));
+		$(".date").html(moment().format(dateFormat));
 		$(".time").updateWithText(moment().format(timeFormat), 1000);
 	}, 10000);
 
