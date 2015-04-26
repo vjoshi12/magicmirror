@@ -4,10 +4,10 @@
 
 <title>Magic Mirror</title>
 
-<script src="jquery-2.1.3.js"></script>
-<script src="moment.js"></script>
-<script src="config.js"></script>
-<script src="main.js"></script>
+<script src="js/jquery-2.1.3.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/config.js"></script>
+<script src="js/main.js?nocache=<?php echo md5(microtime()) ?>"></script>
 <script type="text/javascript">
         var gitHash = '<?php echo trim(`git rev-parse HEAD`) ?>';
 </script>
