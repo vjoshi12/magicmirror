@@ -14,6 +14,9 @@ function roundVal(val) {
 
 $(document).ready(function() {
 
+	// Set default timezone
+	moment.tz.setDefault(timezone);
+
 	// Add a compliment :)
 	$(".compliment").html("What's cookin', good lookin'?");
 
@@ -31,8 +34,8 @@ $(document).ready(function() {
 
 	// Update the time
 	window.setInterval(function() {
-		$(".date").html(moment().format("dddd, MMMM Do YYYY"));
-		$(".time").updateWithText(moment().format("hh:mm"), 1000);
+		$(".date").html(moment().format(dateFormate));
+		$(".time").updateWithText(moment().format(timeFormat), 1000);
 	}, 10000);
 
 	// Update the weather

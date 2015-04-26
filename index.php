@@ -6,6 +6,7 @@
 
 <script src="js/jquery-2.1.3.js"></script>
 <script src="js/moment.js"></script>
+<script src="js/moment-timezone-with-data-2010-2020.js"></script>
 <script src="js/config.js"></script>
 <script src="js/main.js?nocache=<?php echo md5(microtime()) ?>"></script>
 <script type="text/javascript">
