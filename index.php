@@ -11,20 +11,30 @@
 <script type="text/javascript">
         var gitHash = '<?php echo trim(`git rev-parse HEAD`) ?>';
 </script>
-<link rel="stylesheet" type="text/css" href="mystyle.css">
+
+<link rel="stylesheet" type="text/css" href="css/weather-icons.css">
+<style>
+	<?php include('css/mystyle.css') ?>
+</style>
 
 </head>
 
 <body>
 
-	<div id="timeBox">
-		<h1 id="displayTime"></h1>
-		<p id="displayDate"></p>
+	<div class="top left">
+		<div class="date small dimmed"></div>
+		<div class="time"></div>
+		<div class="calendar xxsmall"</div>
 	</div>
 
-	<div id="weatherBox">
-		<h1 id="currWeather">70 degrees</h1>
-		<p id="otherWeather">Other weather</p>
+	<div class="top right">
+		<div class="windsun small dimmed"></div>
+		<div class="temp"></div>
+		<div class="forecast small dimmed"></div>
+	</div>
+
+	<div class="lower-third center-hor">
+		<div class="compliment light"></div>
 	</div>
 
 </body>
