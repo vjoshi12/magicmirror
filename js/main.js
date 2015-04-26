@@ -14,6 +14,9 @@ function roundVal(val) {
 
 $(document).ready(function() {
 
+	// Add a compliment :)
+	$(".compliment").html("What's cookin', good lookin'?");
+
 	// Reload on git commit
 	window.setInterval(function() {
 		$.getJSON('githash.php', {}, function(json, text) {
