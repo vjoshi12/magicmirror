@@ -1,5 +1,5 @@
 jQuery.fn.updateWithText = function(text, speed) {
-	var dummy = $("<h1/>").html(text);
+	var dummy = $("<div/>").html(text);
 	if ($(this).html() != dummy.html()) {
 		$(this).fadeOut(speed / 2, function() {
 			$(this).html(text);
@@ -28,15 +28,15 @@ $(document).ready(function() {
 
 	// Update the time
 	window.setInterval(function() {
-		$("#displayDate").html(moment().format("dddd, MMMM Do YYYY"));
-		$("#displayTime").updateWithText(moment().format("hh:mm"), 1000);
+		$(".date").html(moment().format("dddd, MMMM Do YYYY"));
+		$(".time").updateWithText(moment().format("hh:mm"), 1000);
 	}, 10000);
 
 	// Update the weather
 	window.setInterval(function() {
 		$.getJSON(currWeatherUrl, currWeatherParams, function(json, t) {
 			var temp = roundVal(json.main.temp) + "&deg;";
-			$("#currWeather").updateWithText(temp, 1000);
+			$(".temp").updateWithText(temp, 1000);
 		});
 	}, 60000);
 });
