@@ -72,7 +72,7 @@ $(document).ready(function() {
 			'11n':'wi-night-thunderstorm',
 			'13n':'wi-night-snow',
 			'50n':'wi-night-alt-cloudy-windy'
-		}
+		};
 		$.getJSON(currWeatherUrl, weatherParams, function(json, t) {
 			var temp = roundVal(json.main.temp) + "&deg;";
 			var temp_min = roundVal(json.main.temp_min);
@@ -115,7 +115,7 @@ $(document).ready(function() {
 			'11n':'wi-night-thunderstorm',
 			'13n':'wi-night-snow',
 			'50n':'wi-night-alt-cloudy-windy'
-		}
+		};
 		$.getJSON(forecastUrl, weatherParams, function(json, t) {
 			var forecastData = {};
 			for (var i in json.list) {
@@ -150,6 +150,6 @@ $(document).ready(function() {
 				opacity -= 0.155;
 			}
 			$('.forecast').updateWithText(forecastTable, 1000);
-		})
-	})
+		});
+	}, 60000);
 });
