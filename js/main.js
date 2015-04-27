@@ -85,7 +85,7 @@ $(document).ready(function() {
 			var now = new Date();
 			var sunrise = new Date(json.sys.sunrise * 1000).toTimeString().substring(0, 5);
 			var sunset = new Date(json.sys.sunset * 1000).toTimeString().substring(0, 5);
-			var windString = '<span class="wi wi-strong-wind xdimmed"></span' + wind;
+			var windString = '<span class="wi wi-strong-wind xdimmed"></span>' + wind;
 			var sunString = '<span class="wi wi-sunrise xdimmed"></span>' + sunrise;
 			if (json.sys.sunrise * 1000 < now && json.sys.sunset * 1000 > now) {
 				sunString = '<span class="wi wi-sunset xdimmed"></span>' + sunset;
