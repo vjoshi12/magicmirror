@@ -6,6 +6,6 @@ var dateFormat = "dddd, MMMM Do YYYY";
 var timeFormat = "hh:mm";
 
 var weatherParams = {
-	"zip":"98101",
-	"units":"imperial"
+	'q':'Seattle,us',
+	'units':'imperial'
 };
