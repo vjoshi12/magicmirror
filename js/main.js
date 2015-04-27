@@ -73,7 +73,7 @@ $(document).ready(function() {
 			'13n':'wi-night-snow',
 			'50n':'wi-night-alt-cloudy-windy'
 		}
-		$.getJSON(currWeatherUrl, currWeatherParams, function(json, t) {
+		$.getJSON(currWeatherUrl, weatherParams, function(json, t) {
 			var temp = roundVal(json.main.temp) + "&deg;";
 			var temp_min = roundVal(json.main.temp_min);
 			var temp_max = roundVal(json.main.temp_max);
@@ -116,7 +116,7 @@ $(document).ready(function() {
 			'13n':'wi-night-snow',
 			'50n':'wi-night-alt-cloudy-windy'
 		}
-		$.getJSON(forecastUrl, forecastParams, function(json, t) {
+		$.getJSON(forecastUrl, weatherParams, function(json, t) {
 			var forecastData = {};
 			for (var i in json.list) {
 				var forecast = json.list[i];

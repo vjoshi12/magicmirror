@@ -5,16 +5,7 @@ var timezone = "America/Los_Angeles";
 var dateFormat = "dddd, MMMM Do YYYY";
 var timeFormat = "hh:mm";
 
-var currWeatherParams = {
+var weatherParams = {
 	"zip":"98101",
 	"units":"imperial"
 };
-
-var forecastParams = {
-	"q":"Seattle,us",
-	"mode":"xml",
-	"units":"imperial"
-};
-
-
-
