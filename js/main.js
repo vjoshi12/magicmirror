@@ -130,8 +130,12 @@ $(document).ready(function() {
 					};
 				} else {
 					forecastData[dateKey]['icon'] = forecast.weather[0].icon;
-					forecastData[dateKey]['temp_min'] = (forecast.main.temp < forecastData[dateKey]['temp_min']) ? forecast.main.temp : forecastData[dateKey]['temp_min'];
-					forecastData[dateKey]['temp_max'] = (forecast.main.temp > forecastData[dateKey]['temp_max']) ? forecast.main.temp : forecastData[dateKey]['temp_max'];
+					forecastData[dateKey]['temp_min'] =
+						(forecast.main.temp < forecastData[dateKey]['temp_min']) ?
+							forecast.main.temp : forecastData[dateKey]['temp_min'];
+					forecastData[dateKey]['temp_max'] =
+						(forecast.main.temp > forecastData[dateKey]['temp_max']) ?
+							forecast.main.temp : forecastData[dateKey]['temp_max'];
 				}
 
 			}
