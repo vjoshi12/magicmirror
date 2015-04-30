@@ -67,40 +67,42 @@ $(document).ready(function() {
 
 	// Update the stock info
 	window.setInterval(function() {
-		$.ajax({
-			url: stockLookupUrl,
-			data: {'input':'netflix'},
-			dataType: 'jsonp',
-			success: function(json) {
-				$.ajax({
-					url: stockQuoteUrl,
-					data: {'symbol': json[0].Symbol},
-					dataType: 'jsonp',
-					success: function(json) {
-						var stockStr = json.Symbol;
-						var open = json.Open.toFixed(2).toString();
-						if (open.length == 5) {
-							stockStr += "  ";
-						} else {
-							stockStr += " ";
+		for (var i = 0; i < stockList.length; ++i) {
+			$.ajax({
+				url: stockLookupUrl,
+				data: {'input':stockList[i]},
+				dataType: 'jsonp',
+				success: function(json) {
+					$.ajax({
+						url: stockQuoteUrl,
+						data: {'symbol': json[0].Symbol},
+						dataType: 'jsonp',
+						success: function(json) {
+							var stockStr = json.Symbol;
+							var open = json.Open.toFixed(2).toString();
+							if (open.length == 5) {
+								stockStr += "  ";
+							} else {
+								stockStr += " ";
+							}
+							stockStr += open;
+							var delta = json.ChangePercent.toFixed(2);
+							if (delta < 0.0) {
+								stockStr += " -";
+							} else {
+								stockStr += " +";
+							}
+							stockStr += Math.abs(delta).toString();
+							var classStr = "." + json.Symbol;
+							$(classStr).html(stockStr);
 						}
-						stockStr += open;
-						var delta = json.ChangePercent.toFixed(2);
-						if (delta < 0.0) {
-							stockStr += " -";
-						} else {
-							stockStr += " +";
-						}
-						stockStr += Math.abs(delta).toString();
-						var classStr = "." + json.Symbol;
-						$(classStr).html(stockStr);
-					}
-				})
-			},
-			error: function(data) {
-				console.log(data);
-			}
-		});
+					})
+				},
+				error: function(data) {
+					console.log(data);
+				}
+			});
+		}
 	}, 15000);
 
 	// Update the weather
