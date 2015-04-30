@@ -55,30 +55,40 @@ $(document).ready(function() {
 	window.setInterval(function() {
 		var stockInfo = []
 		for (var i = 0; i < stockList.length; ++i) {
-			$.getJSON(stockLookupUrl, {'input':stockList[i]}, function(json, t) {
-				stockInfo[i] = json.symbol;
+			$.ajax({
+				url: stockLookupUrl,
+				settings: {'input':stockList[i]},
+				dataType: 'jsonp',
+				success: function(data) {
+					stockInfo[i] = data.symbol;
+				},
 			});
 		}
 
 		for (var i = 0; i < stockInfo.length; ++i) {
-			$.getJSON(stockQuoteUrl, {'symbol':stockInfo[i]}, function(json, t) {
-				var open = json.Open;
-				if (open >= 100.00) {
+			$.ajax({
+				url: stockQuoteUrl,
+				settings: {'symbol':stockInfo[i]},
+				dataType: 'jsonp',
+				success: function(json) {
+					var open = json.Open;
+					if (open >= 100.00) {
+						stockInfo[i] += " ";
+					}
+					else {
+						stockInfo[i] += "  ";
+					}
+					stockInfo[i] += open.toFixed(2).toString();
 					stockInfo[i] += " ";
+					var delta = json.ChangePercent.toFixed(2);
+					if (delta > 0) {
+						stockInfo[i] += "+";
+					}
+					else {
+						stockInfo[i] += "-";
+					}
+					stockInfo[i] += Math.abs(delta).toString();
 				}
-				else {
-					stockInfo[i] += "  ";
-				}
-				stockInfo[i] += open.toFixed(2).toString();
-				stockInfo[i] += " ";
-				var delta = json.ChangePercent.toFixed(2);
-				if (delta > 0) {
-					stockInfo[i] += "+";
-				}
-				else {
-					stockInfo[i] += "-";
-				}
-				stockInfo[i] += Math.abs(delta).toString();
 			});
 		}
 
