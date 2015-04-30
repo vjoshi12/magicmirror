@@ -25,7 +25,7 @@
 	<div class="top left">
 		<div class="date small dimmed"></div>
 		<div class="time"></div>
-		<div class="calendar xxsmall"></div>
+		<div class="stockinfo small dimmed"></div>
 	</div>
 
 	<div class="top right">

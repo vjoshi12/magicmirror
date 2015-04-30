@@ -51,6 +51,49 @@ $(document).ready(function() {
 		$(".time").updateWithText(moment().format(timeFormat), 1000);
 	}, 10000);
 
+	// Update the stock info
+	window.setInterval(function() {
+		var stockInfo = []
+		for (var i = 0; i < stockList.length; ++i) {
+			$.getJSON(stockLookupUrl, {'input':stockList[i]}, function(json, t) {
+				stockInfo[i] = json.symbol;
+			});
+		}
+
+		for (var i = 0; i < stockInfo.length; ++i) {
+			$.getJSON(stockQuoteUrl, {'symbol':stockInfo[i]}, function(json, t) {
+				var open = json.Open;
+				if (open >= 100.00) {
+					stockInfo[i] += " ";
+				}
+				else {
+					stockInfo[i] += "  ";
+				}
+				stockInfo[i] += open.toFixed(2).toString();
+				stockInfo[i] += " ";
+				var delta = json.ChangePercent.toFixed(2);
+				if (delta > 0) {
+					stockInfo[i] += "+";
+				}
+				else {
+					stockInfo[i] += "-";
+				}
+				stockInfo[i] += Math.abs(delta).toString();
+			});
+		}
+
+		var stockTable = $('<table />').addClass('stock-table');
+		var opacity = 1;
+		for (var i in stockInfo) {
+			var stock = stockInfo[i];
+			var row = $('<tr />').css('opacity', opacity);
+			row.append($('<td/>').addClass('stock-string').html(stockInfo[i]);
+			stockTable.append(row);
+			opacity -= 0.155;
+		}
+		$('.stockinfo').updateWithText(stockTable, 1000);
+	}, 60000);
+
 	// Update the weather
 	window.setInterval(function() {
 		var iconTable = {
