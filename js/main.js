@@ -87,7 +87,7 @@ $(document).ready(function() {
 		for (var i in stockInfo) {
 			var stock = stockInfo[i];
 			var row = $('<tr />').css('opacity', opacity);
-			row.append($('<td/>').addClass('stock-string').html(stockInfo[i]);
+			row.append($('<td/>').addClass('stock-string').html(stockInfo[i]));
 			stockTable.append(row);
 			opacity -= 0.155;
 		}
