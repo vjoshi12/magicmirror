@@ -63,12 +63,12 @@ $(document).ready(function() {
 					data: {'symbol': json[0].Symbol},
 					dataType: 'jsonp',
 					success: function(json) {
-						stockStr = json.Symbol
+						var stockStr = json.Symbol;
 						var open = json.Open.toFixed(2).toString();
 						if (open.length == 5) {
-							stockStr += "  "
+							stockStr += "  ";
 						} else {
-							stockStr += " "
+							stockStr += " ";
 						}
 						stockStr += open;
 						var delta = json.ChangePercent.toFixed(2);
@@ -78,7 +78,7 @@ $(document).ready(function() {
 							stockStr += " +";
 						}
 						stockStr += Math.abs(delta).toString();
-						var entry = $('<div/>').html(strockStr)
+						var entry = $('<div/>').html(strockStr);
 						$('.stockinfo').updateWithText(entry, 1000);
 					}
 				})
