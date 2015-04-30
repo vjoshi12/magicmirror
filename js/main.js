@@ -60,12 +60,12 @@ $(document).ready(function() {
 			success: function(json) {
 				$.ajax({
 					url: stockQuoteUrl,
-					data: {'symbol': json.Symbol},
+					data: {'symbol': json[0].Symbol},
 					dataType: 'jsonp',
 					success: function(json) {
-						stockStr = json.Symbol + " " +
-							json.Open.toString() + " " +
-							json.ChangePercent.toString();
+						stockStr = json[0].Symbol + " " +
+							json[0].Open.toString() + " " +
+							json[0].ChangePercent.toString();
 						var entry = $('<div/>').html(strockStr)
 						$('.stockinfo').updateWithText(entry, 1000);
 					}
