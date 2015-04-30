@@ -53,21 +53,29 @@ $(document).ready(function() {
 
 	// Update the stock info
 	window.setInterval(function() {
-		var stockInfo = []
-		for (var i = 0; i < stockList.length; ++i) {
-			$.ajax({
-				url: stockLookupUrl,
-				data: {'input':stockList[i]},
-				dataType: 'jsonp',
-				success: function(data) {
-					stockInfo[i] = data.symbol;
-				},
-				error: function(data) {
-					console.log(data);
-				}
-			});
-		}
-
+		$.ajax({
+			url: stockLookupUrl,
+			data: {'input':'netflix'},
+			dataType: 'jsonp',
+			success: function(json) {
+				$.ajax({
+					url: stockQuoteUrl,
+					data: {'symbol': json.symbol},
+					dataType: 'jsonp',
+					success: function(json) {
+						stockStr = json.symbol + " " +
+							json.Open.toString() + " " +
+							json.ChangePercent.toString();
+						var entry = $('<div/>').html(strockStr)
+						$('.stockinfo').updateWithText(entry, 1000);
+					}
+				})
+			},
+			error: function(data) {
+				console.log(data);
+			}
+		});
+		/*
 		for (var i = 0; i < stockInfo.length; ++i) {
 			$.ajax({
 				url: stockQuoteUrl,
@@ -108,7 +116,8 @@ $(document).ready(function() {
 			opacity -= 0.155;
 		}
 		$('.stockinfo').updateWithText(stockTable, 1000);
-	}, 30000);
+		*/
+	}, 15000);
 
 	// Update the weather
 	window.setInterval(function() {
