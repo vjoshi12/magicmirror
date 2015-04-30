@@ -63,9 +63,21 @@ $(document).ready(function() {
 					data: {'symbol': json[0].Symbol},
 					dataType: 'jsonp',
 					success: function(json) {
-						stockStr = json[0].Symbol + " " +
-							json[0].Open.toString() + " " +
-							json[0].ChangePercent.toString();
+						stockStr = json.Symbol
+						var open = json.Open.toFixed(2).toString();
+						if (open.length == 5) {
+							stockStr += "  "
+						} else {
+							stockStr += " "
+						}
+						stockStr += open;
+						var delta = json.ChangePercent.toFixed(2);
+						if (delta < 0.0) {
+							stockStr += " -";
+						} else {
+							stockStr += " +";
+						}
+						stockStr += Math.abs(delta).toString();
 						var entry = $('<div/>').html(strockStr)
 						$('.stockinfo').updateWithText(entry, 1000);
 					}
