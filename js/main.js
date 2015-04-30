@@ -57,20 +57,23 @@ $(document).ready(function() {
 		for (var i = 0; i < stockList.length; ++i) {
 			$.ajax({
 				url: stockLookupUrl,
-				settings: {'input':stockList[i]},
+				data: {'input':stockList[i]},
 				dataType: 'jsonp',
-				jsonp: function(data) {
+				success: function(data) {
 					stockInfo[i] = data.symbol;
 				},
+				error: function(data) {
+					console.log(data);
+				}
 			});
 		}
 
 		for (var i = 0; i < stockInfo.length; ++i) {
 			$.ajax({
 				url: stockQuoteUrl,
-				settings: {'symbol':stockInfo[i]},
+				data: {'symbol':stockInfo[i]},
 				dataType: 'jsonp',
-				jsonp: function(json) {
+				success: function(json) {
 					var open = json.Open;
 					if (open >= 100.00) {
 						stockInfo[i] += " ";
@@ -88,6 +91,9 @@ $(document).ready(function() {
 						stockInfo[i] += "-";
 					}
 					stockInfo[i] += Math.abs(delta).toString();
+				},
+				error: function(data) {
+					console.log(data);
 				}
 			});
 		}
