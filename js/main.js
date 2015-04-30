@@ -51,6 +51,20 @@ $(document).ready(function() {
 		$(".time").updateWithText(moment().format(timeFormat), 1000);
 	}, 10000);
 
+	// Set up stock table rows
+	for (var i = 0; i < stockList.length; ++i) {
+		$.ajax({
+			url: stockLookupUrl,
+			data: {'input': stockList[i]},
+			dataType: 'jsonp',
+			success: function(json) {
+				var row = $('<tr/>');
+				row.append($('<td/>').addClass(json[0].Symbol));
+				$('.stock-table').append(row);
+			}
+		});
+	}
+
 	// Update the stock info
 	window.setInterval(function() {
 		$.ajax({
@@ -78,8 +92,8 @@ $(document).ready(function() {
 							stockStr += " +";
 						}
 						stockStr += Math.abs(delta).toString();
-						var entry = $('<div/>').html(stockStr);
-						$('.stockinfo').updateWithText(entry, 1000);
+						var classStr = "." + json.Symbol;
+						$(classStr).html(stockStr);
 					}
 				})
 			},
@@ -87,48 +101,6 @@ $(document).ready(function() {
 				console.log(data);
 			}
 		});
-		/*
-		for (var i = 0; i < stockInfo.length; ++i) {
-			$.ajax({
-				url: stockQuoteUrl,
-				data: {'symbol':stockInfo[i]},
-				dataType: 'jsonp',
-				success: function(json) {
-					var open = json.Open;
-					if (open >= 100.00) {
-						stockInfo[i] += " ";
-					}
-					else {
-						stockInfo[i] += "  ";
-					}
-					stockInfo[i] += open.toFixed(2).toString();
-					stockInfo[i] += " ";
-					var delta = json.ChangePercent.toFixed(2);
-					if (delta > 0) {
-						stockInfo[i] += "+";
-					}
-					else {
-						stockInfo[i] += "-";
-					}
-					stockInfo[i] += Math.abs(delta).toString();
-				},
-				error: function(data) {
-					console.log(data);
-				}
-			});
-		}
-
-		var stockTable = $('<table />').addClass('stock-table');
-		var opacity = 1;
-		for (var i in stockInfo) {
-			var stock = stockInfo[i];
-			var row = $('<tr />').css('opacity', opacity);
-			row.append($('<td/>').addClass('stock-string').html(stockInfo[i]));
-			stockTable.append(row);
-			opacity -= 0.155;
-		}
-		$('.stockinfo').updateWithText(stockTable, 1000);
-		*/
 	}, 15000);
 
 	// Update the weather

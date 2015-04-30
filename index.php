@@ -25,7 +25,9 @@
 	<div class="top left">
 		<div class="date small dimmed"></div>
 		<div class="time"></div>
-		<div class="stockinfo small dimmed"></div>
+		<div class="stockinfo small dimmed">
+			<table class="stock-table"></table>
+		</div>
 	</div>
 
 	<div class="top right">
