@@ -78,7 +78,7 @@ $(document).ready(function() {
 							stockStr += " +";
 						}
 						stockStr += Math.abs(delta).toString();
-						var entry = $('<div/>').html(strockStr);
+						var entry = $('<div/>').html(stockStr);
 						$('.stockinfo').updateWithText(entry, 1000);
 					}
 				})
