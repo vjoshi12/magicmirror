@@ -60,10 +60,10 @@ $(document).ready(function() {
 			success: function(json) {
 				$.ajax({
 					url: stockQuoteUrl,
-					data: {'symbol': json.symbol},
+					data: {'symbol': json.Symbol},
 					dataType: 'jsonp',
 					success: function(json) {
-						stockStr = json.symbol + " " +
+						stockStr = json.Symbol + " " +
 							json.Open.toString() + " " +
 							json.ChangePercent.toString();
 						var entry = $('<div/>').html(strockStr)
