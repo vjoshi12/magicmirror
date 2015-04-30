@@ -59,7 +59,7 @@ $(document).ready(function() {
 				url: stockLookupUrl,
 				settings: {'input':stockList[i]},
 				dataType: 'jsonp',
-				success: function(data) {
+				jsonp: function(data) {
 					stockInfo[i] = data.symbol;
 				},
 			});
@@ -70,7 +70,7 @@ $(document).ready(function() {
 				url: stockQuoteUrl,
 				settings: {'symbol':stockInfo[i]},
 				dataType: 'jsonp',
-				success: function(json) {
+				jsonp: function(json) {
 					var open = json.Open;
 					if (open >= 100.00) {
 						stockInfo[i] += " ";
@@ -102,7 +102,7 @@ $(document).ready(function() {
 			opacity -= 0.155;
 		}
 		$('.stockinfo').updateWithText(stockTable, 1000);
-	}, 60000);
+	}, 30000);
 
 	// Update the weather
 	window.setInterval(function() {
