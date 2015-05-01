@@ -91,7 +91,7 @@ $(document).ready(function() {
 							}
 							delta += Math.abs(deltaNum).toString();
 							var classStr = "." + json.Symbol;
-							$(classStr + ".stock-symbol").html(stock);
+							$(classStr + ".stock-symbol").html(symbol);
 							$(classStr + ".stock-open").html(open);
 							$(classStr + ".stock-percent").html(delta);
 						}
