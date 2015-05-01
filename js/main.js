@@ -62,8 +62,9 @@ $(document).ready(function() {
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-symbol'));
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-open'));
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-percent'));
-				var numAdded = $('.stock-table > tr').length;
+				var numAdded = $('.stock-counter').html();
 				row.css('opacity', 1.0 - (0.155 * numAdded));
+				$('stock-counter').html(numAdded + 1);
 				$('.stock-table').append(row);
 			}
 		});
