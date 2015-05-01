@@ -58,7 +58,7 @@ $(document).ready(function() {
 			data: {'input': stockList[i]},
 			dataType: 'jsonp',
 			success: function(json) {
-				var row = $('<tr/>');
+				var row = $('<tr/>').addClass('stock-row');
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-symbol'));
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-open'));
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-percent'));
@@ -66,6 +66,11 @@ $(document).ready(function() {
 			}
 		});
 	}
+	var opacity = 1;
+	$('tr.stock-row').each(function() {
+		$(this).css('opacity', opacity);
+		opacity -= 0.155;
+	})
 
 	// Update the stock info
 	window.setInterval(function() {
@@ -89,7 +94,11 @@ $(document).ready(function() {
 							} else {
 								delta += "+";
 							}
-							delta += Math.abs(deltaNum).toString();
+							if (deltaNum == 0.00) {
+								delta += "0.00";
+							} else {
+								delta += Math.abs(deltaNum).toString();
+							}
 							var classStr = "." + json.Symbol;
 							$(classStr + ".stock-symbol").html(symbol);
 							$(classStr + ".stock-open").html(open);
