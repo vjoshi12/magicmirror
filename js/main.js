@@ -59,7 +59,9 @@ $(document).ready(function() {
 			dataType: 'jsonp',
 			success: function(json) {
 				var row = $('<tr/>');
-				row.append($('<td/>').addClass(json[0].Symbol));
+				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-symbol'));
+				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-open'));
+				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-percent'));
 				$('.stock-table').append(row);
 			}
 		});
@@ -78,23 +80,20 @@ $(document).ready(function() {
 						data: {'symbol': json[0].Symbol},
 						dataType: 'jsonp',
 						success: function(json) {
-							var stockStr = json.Symbol;
+							var stock = json.Symbol;
 							var open = json.Open.toFixed(2).toString();
-							if (open.length == 5) {
-								stockStr += "  ";
+							var deltaNum = json.ChangePercent.toFixed(2);
+							var delta = ""
+							if (deltaNum < 0.0) {
+								delta += "-";
 							} else {
-								stockStr += " ";
+								delta += "+";
 							}
-							stockStr += open;
-							var delta = json.ChangePercent.toFixed(2);
-							if (delta < 0.0) {
-								stockStr += " -";
-							} else {
-								stockStr += " +";
-							}
-							stockStr += Math.abs(delta).toString();
+							delta += Math.abs(deltaNum).toString();
 							var classStr = "." + json.Symbol;
-							$(classStr).html(stockStr);
+							$(classStr + ".stock-symbol").html(stock);
+							$(classStr + ".stock-open").html(open);
+							$(classStr + ".stock-percent").html(delta);
 						}
 					})
 				},

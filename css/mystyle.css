@@ -184,6 +184,30 @@ body, html {
 	text-align: right;
 }
 
+.stock-symbol {
+	text-align: right;
+	font-size: 20px;
+	float: left;
+	line-height: 20px;
+	width: 70px;
+}
+
+.stock-open {
+	text-align: left;
+	font-size: 20px;
+	float: left;
+	line-height: 20px;
+	width: 60px;
+}
+
+.stock-percent {
+	text-align: left;
+	font-size: 20px;
+	float: left;
+	line-height: 20px;
+	width: 60px;
+}
+
 @font-face {
   font-family: 'HelveticaNeue-UltraLight';
   src: url('font/HelveticaNeue-UltraLight.eot'); /* IE9 Compat Modes */
