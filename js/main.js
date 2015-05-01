@@ -66,10 +66,9 @@ $(document).ready(function() {
 			}
 		});
 	}
-	var opacity = 1;
-	$('.stock-row').each(function() {
-		$(this).css('opacity', opacity);
-		opacity -= 0.155;
+	$('tr.stock-row').each(function(index, row) {
+		var opacity = 1.0 - (0.155 * index);
+		$(row).css('opacity', opacity);
 	})
 
 	// Update the stock info
