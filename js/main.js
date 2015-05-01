@@ -62,15 +62,12 @@ $(document).ready(function() {
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-symbol'));
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-open'));
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-percent'));
+				var numAdded = $('.stock-table > tr').length;
+				row.css('opacity', 1.0 - (0.155 * numAdded));
 				$('.stock-table').append(row);
 			}
 		});
 	}
-	$(".stock-row").each(function(index, row) {
-		console.log("Operating on row " + index.toString());
-		var opacity = 1.0 - (0.155 * index);
-		$(row).css("opacity", opacity);
-	});
 
 	// Update the stock info
 	window.setInterval(function() {
