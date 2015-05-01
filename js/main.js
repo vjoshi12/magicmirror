@@ -67,7 +67,7 @@ $(document).ready(function() {
 		});
 	}
 	var opacity = 1;
-	$('tr.stock-row').each(function() {
+	$('.stock-row').each(function() {
 		$(this).css('opacity', opacity);
 		opacity -= 0.155;
 	})
