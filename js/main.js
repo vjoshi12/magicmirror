@@ -101,6 +101,11 @@ $(document).ready(function() {
 							$(classStr + ".stock-symbol").html(symbol);
 							$(classStr + ".stock-open").html(open);
 							$(classStr + ".stock-percent").html(delta);
+							if (deltaNum < 0.00) {
+								$(classStr + ".stock-percent").css('color', 'red');
+							} else if (deltaNum > 0.00) {
+								$(classStr + ".stock-percent").css('color', 'green');
+							}
 						}
 					})
 				},
