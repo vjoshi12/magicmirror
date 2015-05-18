@@ -186,10 +186,11 @@ body, html {
 
 .stock-symbol {
 	text-align: left;
-	font-size: 20px;
+	font-size: 25px;
+	font-weight: bold;
 	float: left;
 	line-height: 20px;
-	width: 90px;
+	width: 110px;
 }
 
 .stock-open {

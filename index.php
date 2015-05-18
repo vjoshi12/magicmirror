@@ -27,7 +27,6 @@
 		<div class="time"></div>
 		<div class="stockinfo small dimmed">
 			<table class="stock-table"></table>
-			<div class="stock-counter" style="display: none">0</div>
 		</div>
 	</div>
 

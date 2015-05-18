@@ -52,19 +52,19 @@ $(document).ready(function() {
 	}, 10000);
 
 	// Set up stock table rows
+	console.log("Setting up stock table rows");
 	for (var i = 0; i < stockList.length; ++i) {
 		$.ajax({
 			url: stockLookupUrl,
 			data: {'input': stockList[i]},
 			dataType: 'jsonp',
+			timeout: 5000,
 			success: function(json) {
 				var row = $('<tr/>').addClass('stock-row');
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-symbol'));
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-open'));
 				row.append($('<td/>').addClass(json[0].Symbol).addClass('stock-percent'));
-				var numAdded = $('.stock-counter').html();
-				row.css('opacity', 1.0 - (0.155 * numAdded));
-				$('stock-counter').html(numAdded + 1);
+				console.log("Appending stock table row");
 				$('.stock-table').append(row);
 			}
 		});
@@ -77,11 +77,13 @@ $(document).ready(function() {
 				url: stockLookupUrl,
 				data: {'input':stockList[i]},
 				dataType: 'jsonp',
+				timeout: 5000,
 				success: function(json) {
 					$.ajax({
 						url: stockQuoteUrl,
 						data: {'symbol': json[0].Symbol},
 						dataType: 'jsonp',
+						timeout: 5000,
 						success: function(json) {
 							var stock = json.Symbol;
 							var open = json.Open.toFixed(2).toString();
@@ -98,7 +100,7 @@ $(document).ready(function() {
 								delta += Math.abs(deltaNum).toString();
 							}
 							var classStr = "." + json.Symbol;
-							$(classStr + ".stock-symbol").html(symbol);
+							$(classStr + ".stock-symbol").html(stock);
 							$(classStr + ".stock-open").html(open);
 							$(classStr + ".stock-percent").html(delta);
 							if (deltaNum < 0.00) {
