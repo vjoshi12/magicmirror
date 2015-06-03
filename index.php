@@ -37,6 +37,7 @@
 	</div>
 
 	<div class="lower-third center-hor">
+		<canvas id="canvas" width="1000px" height="325px" style="display: block;"></canvas>
 		<div class="compliment light"></div>
 	</div>
 

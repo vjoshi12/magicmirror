@@ -25,6 +25,83 @@ $.fn.outerHTML = function(){
     })(this[0]));
 }
 
+
+// create the audio context (chrome only for now)
+// create the audio context (chrome only for now)
+if (! window.AudioContext) {
+    if (! window.webkitAudioContext) {
+        alert('no audiocontext found');
+    }
+    window.AudioContext = window.webkitAudioContext;
+}
+var context;
+var audioBuffer;
+var sourceNode;
+var analyser;
+var javascriptNode;
+var ctx;
+var gradient; 
+
+function setupAudioNodes() {
+
+    // setup a javascript node
+    javascriptNode = context.createScriptProcessor(2048, 1, 1);
+    // connect to destination, else it isn't called
+    javascriptNode.connect(context.destination);
+
+
+    // setup a analyzer
+    analyser = context.createAnalyser();
+    analyser.smoothingTimeConstant = 0.3;
+    analyser.fftSize = 512;
+
+    // connect the source node
+    sourceNode.connect(analyser);
+    analyser.connect(javascriptNode);
+
+    sourceNode.connect(context.destination);
+}
+
+// log if an error occurs
+function onError(e) {
+    console.log(e);
+}
+
+function drawSpectrum(array) {
+    for ( var i = 0; i < (array.length); i++ ){
+        var value = array[i];
+
+        ctx.fillRect(i*5,325-value,3,325);
+        //  console.log([i,value])
+    }
+};
+
+function callback(stream) {
+	sourceNode = context.createMediaStreamSource(stream);
+	ctx = $("#canvas").get()[0].getContext("2d");
+	gradient = ctx.createLinearGradient(0,0,0,300);
+	gradient.addColorStop(1,'#000000');
+	gradient.addColorStop(0.75,'#ff0000');
+	gradient.addColorStop(0.25,'#ffff00');
+	gradient.addColorStop(0,'#ffffff');
+	setupAudioNodes();
+	javascriptNode.onaudioprocess = function() {
+	    // get the average for the first channel
+	    var array =  new Uint8Array(analyser.frequencyBinCount);
+	    analyser.getByteFrequencyData(array);
+	    // clear the current state
+	    ctx.clearRect(0, 0, 1000, 325);
+	    // set the fill style
+	    ctx.fillStyle=gradient;
+	    drawSpectrum(array);
+	}
+}
+
+function hasGetUserMedia() {
+  return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+
 $(document).ready(function() {
 
 	// Set default timezone
@@ -33,6 +110,10 @@ $(document).ready(function() {
 	// Add a compliment :)
 	$(".compliment").html("What's cookin', good lookin'?");
 
+	// load the sound
+	context = new AudioContext();
+	navigator.webkitGetUserMedia({audio:true}, callback, onError);
+	
 	// Reload on git commit
 	window.setInterval(function() {
 		$.getJSON('githash.php', {}, function(json, text) {
